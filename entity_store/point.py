@@ -6,9 +6,9 @@ class Point:
 		from entity_store import ENTITY_STORE
 
 		self.id = id
-		self.x = x
-		self.y = y
-		self.z = z
+		self.x = int(x)
+		self.y = int(y)
+		self.z = int(z)
 
 		ENTITY_STORE.register(self, id)
 

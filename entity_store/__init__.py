@@ -2,14 +2,15 @@ from entity_store.edge import Edge
 from entity_store.point import Point
 from entity_store.solid import Solid
 from entity_store.wall import Wall
+from copy import deepcopy
 
 
 class EntityStore:
-	def __init__(self):
-		self.points = {}
-		self.edges = {}
-		self.walls = {}
-		self.solids = {}
+	def __init__(self, points=None, edges=None, walls=None, solids=None):
+		self.points = {} if points is None else points
+		self.edges = {} if edges is None else edges
+		self.walls = {} if walls is None else walls
+		self.solids = {} if solids is None else solids
 
 		self.class_to_store_map = {
 			Point.__name__: self.points,
@@ -23,6 +24,9 @@ class EntityStore:
 
 	def get_entity(self, class_ref, id):
 		return self.class_to_store_map[class_ref.__name__][id]
+
+	def copy(self):
+		return EntityStore(deepcopy(self.points), self.edges, self.walls, self.solids)
 
 
 ENTITY_STORE = EntityStore()
