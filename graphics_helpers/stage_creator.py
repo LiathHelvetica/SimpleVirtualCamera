@@ -5,26 +5,28 @@ from entity_store.point import Point
 from math import sin, cos
 
 
-def create_stage():
+def create_stage(x_c, y_c):
 	entities = ENTITY_STORE.copy()
-	return transform_store(entities)
+	return transform_store(entities, x_c, y_c)
 
 
-def transform_store(entities):
+def transform_store(entities, x_c, y_c):
 	for point_id, point in entities.points.items():
 		new_point = point.to_vector()
+		camera_parameters_store = CAMERA_PARAMETERS_STORE.store
 		new_point = transform_point(
 			create_shift_matrix(
-				CAMERA_PARAMETERS_STORE[X_SHIFT_KEY],
-				CAMERA_PARAMETERS_STORE[Y_SHIFT_KEY],
-				CAMERA_PARAMETERS_STORE[Z_SHIFT_KEY]
+				camera_parameters_store[X_SHIFT_KEY],
+				camera_parameters_store[Y_SHIFT_KEY],
+				camera_parameters_store[Z_SHIFT_KEY]
 			),
 			new_point
 		)
-		new_point = transform_point(create_x_rotation_matrix(CAMERA_PARAMETERS_STORE[X_ROTATION_KEY]), new_point)
-		new_point = transform_point(create_y_rotation_matrix(CAMERA_PARAMETERS_STORE[Y_ROTATION_KEY]), new_point)
-		new_point = transform_point(create_z_rotation_matrix(CAMERA_PARAMETERS_STORE[Z_ROTATION_KEY]), new_point)
-		new_point = transform_point(create_cast_matrix(CAMERA_PARAMETERS_STORE[ZOOM_KEY]), new_point)
+		new_point = transform_point(create_x_rotation_matrix(camera_parameters_store[X_ROTATION_KEY]), new_point)
+		new_point = transform_point(create_y_rotation_matrix(camera_parameters_store[Y_ROTATION_KEY]), new_point)
+		new_point = transform_point(create_z_rotation_matrix(camera_parameters_store[Z_ROTATION_KEY]), new_point)
+		new_point = transform_point(create_cast_matrix(camera_parameters_store[ZOOM_KEY]), new_point)
+		new_point = transform_point(create_shift_matrix(x_c, y_c,	0), new_point)
 
 		entities.points[point_id] = Point(new_point[0], new_point[1], new_point[2], point.id, entities)
 	return entities

@@ -12,18 +12,18 @@
         "H": { "x": 100, "y": 200, "z": 300 }
       },
       "edges": {
-        "AB": { "data": ["A", "B"], "colour": "green" },
-        "BC": { "data": ["B", "C"], "colour": "green" },
-        "CD": { "data": ["C", "D"], "colour": "green" },
-        "AD": { "data": ["A", "D"], "colour": "green" },
-        "AE": { "data": ["A", "E"] },
-        "BF": { "data": ["B", "F"] },
-        "CG": { "data": ["C", "G"] },
-        "DH": { "data": ["D", "H"] },
-        "EF": { "data": ["E", "F"] },
-        "FG": { "data": ["F", "G"] },
-        "GH": { "data": ["G", "H"] },
-        "HE": { "data": ["H", "E"] }
+        "AB": { "data": ["A", "B"], "colour": "l-green" },
+        "BC": { "data": ["B", "C"], "colour": "l-green" },
+        "CD": { "data": ["C", "D"], "colour": "l-green" },
+        "AD": { "data": ["A", "D"], "colour": "l-green" },
+        "AE": { "data": ["A", "E"], "colour": "green" },
+        "BF": { "data": ["B", "F"], "colour": "green" },
+        "CG": { "data": ["C", "G"], "colour": "green" },
+        "DH": { "data": ["D", "H"], "colour": "green" },
+        "EF": { "data": ["E", "F"], "colour": "green" },
+        "FG": { "data": ["F", "G"], "colour": "green" },
+        "GH": { "data": ["G", "H"], "colour": "green" },
+        "HE": { "data": ["H", "E"], "colour": "green" }
       },
       "walls": [
         ["AB", "BC", "CD", "AD"],
@@ -46,10 +46,78 @@
         "H": { "x": -100, "y": -200, "z": 300 }
       },
       "edges": {
-        "AB": { "data": ["A", "B"], "colour": "red" },
-        "BC": { "data": ["B", "C"], "colour": "red" },
-        "CD": { "data": ["C", "D"], "colour": "red" },
-        "AD": { "data": ["A", "D"], "colour": "red" },
+        "AB": { "data": ["A", "B"], "colour": "l-red" },
+        "BC": { "data": ["B", "C"], "colour": "l-red" },
+        "CD": { "data": ["C", "D"], "colour": "l-red" },
+        "AD": { "data": ["A", "D"], "colour": "l-red" },
+        "AE": { "data": ["A", "E"], "colour": "red" },
+        "BF": { "data": ["B", "F"], "colour": "red" },
+        "CG": { "data": ["C", "G"], "colour": "red" },
+        "DH": { "data": ["D", "H"], "colour": "red" },
+        "EF": { "data": ["E", "F"], "colour": "red" },
+        "FG": { "data": ["F", "G"], "colour": "red" },
+        "GH": { "data": ["G", "H"], "colour": "red" },
+        "HE": { "data": ["H", "E"], "colour": "red" }
+      },
+      "walls": [
+        ["AB", "BC", "CD", "AD"],
+        ["AE", "EF", "BF", "AB"],
+        ["BC", "CG", "FG", "BF"],
+        ["CD", "DH", "GH", "CG"],
+        ["AE", "HE", "DH", "AD"],
+        ["EF", "FG", "GH", "HE"]
+      ]
+    },
+    "entity-3": {
+      "points": {
+        "A": { "x": -100, "y": 100, "z": 0 },
+        "B": { "x": -200, "y": 100, "z": 0 },
+        "C": { "x": -200, "y": 200, "z": 0 },
+        "D": { "x": -100, "y": 200, "z": 0 },
+        "E": { "x": -100, "y": 100, "z": 300 },
+        "F": { "x": -200, "y": 100, "z": 300 },
+        "G": { "x": -200, "y": 200, "z": 300 },
+        "H": { "x": -100, "y": 200, "z": 300 }
+      },
+      "edges": {
+        "AB": { "data": ["A", "B"], "colour": "l-blue" },
+        "BC": { "data": ["B", "C"], "colour": "l-blue" },
+        "CD": { "data": ["C", "D"], "colour": "l-blue" },
+        "AD": { "data": ["A", "D"], "colour": "l-blue" },
+        "AE": { "data": ["A", "E"], "colour": "blue" },
+        "BF": { "data": ["B", "F"], "colour": "blue" },
+        "CG": { "data": ["C", "G"], "colour": "blue" },
+        "DH": { "data": ["D", "H"], "colour": "blue" },
+        "EF": { "data": ["E", "F"], "colour": "blue" },
+        "FG": { "data": ["F", "G"], "colour": "blue" },
+        "GH": { "data": ["G", "H"], "colour": "blue" },
+        "HE": { "data": ["H", "E"], "colour": "blue" }
+      },
+      "walls": [
+        ["AB", "BC", "CD", "AD"],
+        ["AE", "EF", "BF", "AB"],
+        ["BC", "CG", "FG", "BF"],
+        ["CD", "DH", "GH", "CG"],
+        ["AE", "HE", "DH", "AD"],
+        ["EF", "FG", "GH", "HE"]
+      ]
+    },
+    "entity-4": {
+      "points": {
+        "A": { "x": 100, "y": -100, "z": 0 },
+        "B": { "x": 200, "y": -100, "z": 0 },
+        "C": { "x": 200, "y": -200, "z": 0 },
+        "D": { "x": 100, "y": -200, "z": 0 },
+        "E": { "x": 100, "y": -100, "z": 300 },
+        "F": { "x": 200, "y": -100, "z": 300 },
+        "G": { "x": 200, "y": -200, "z": 300 },
+        "H": { "x": 100, "y": -200, "z": 300 }
+      },
+      "edges": {
+        "AB": { "data": ["A", "B"] },
+        "BC": { "data": ["B", "C"] },
+        "CD": { "data": ["C", "D"] },
+        "AD": { "data": ["A", "D"] },
         "AE": { "data": ["A", "E"] },
         "BF": { "data": ["B", "F"] },
         "CG": { "data": ["C", "G"] },

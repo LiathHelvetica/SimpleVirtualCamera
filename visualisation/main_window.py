@@ -18,5 +18,5 @@ class MainWindow(Window):
 		self.clear()
 		x_c = self.width // 2
 		y_c = self.height // 2
-		entities = create_stage()
+		entities = create_stage(x_c, y_c)
 		paint(entities, x_c, y_c)
