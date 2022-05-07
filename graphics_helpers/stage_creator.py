@@ -7,6 +7,10 @@ from math import sin, cos
 
 def create_stage():
 	entities = ENTITY_STORE.copy()
+	return transform_store(entities)
+
+
+def transform_store(entities):
 	for point_id, point in entities.points.items():
 		new_point = point.to_vector()
 		new_point = transform_point(
@@ -28,7 +32,7 @@ def create_stage():
 
 def transform_point(t_matrix, p):
 	outcome = list(map(lambda row: sum([m_x * p_x for m_x, p_x in zip(row, p)]), t_matrix))
-	return list(map(lambda x: x / outcome[3] if outcome[3] != 0.0 else TINY_NUMBER, outcome))
+	return list(map(lambda x: x / (outcome[3] if outcome[3] != 0.0 else TINY_NUMBER), outcome))
 
 
 def create_shift_matrix(x, y, z):
@@ -68,6 +72,7 @@ def create_z_rotation_matrix(phi):
 
 
 def create_cast_matrix(d):
+	d = TINY_NUMBER if d == 0.0 else d
 	return [
 		[1, 0, 0, 0],
 		[0, 1, 0, 0],

@@ -1,11 +1,12 @@
 from properties import ASSETS_FILES
-from properties import POINTS_KEY, EDGES_KEY, WALLS_KEY, ENTITIES_KEY
+from properties import POINTS_KEY, EDGES_KEY, WALLS_KEY, ENTITIES_KEY, EDGE_DATA_KEY, EDGE_COLOUR_KEY
 from properties import X_KEY, Y_KEY, Z_KEY
 from entity_store.point import POINT_CLASS_TAG, Point
 from entity_store.edge import EDGE_CLASS_TAG, Edge
 from entity_store.wall import WALL_CLASS_TAG, Wall
 from entity_store.solid import Solid
 from entity_store import ENTITY_STORE
+from graphics_helpers.colour_map import DEFAULT_COLOUR
 import json
 
 
@@ -18,10 +19,12 @@ def read_assets():
 					Point(point[X_KEY], point[Y_KEY], point[Z_KEY], to_id(entity_id, point_id, POINT_CLASS_TAG), ENTITY_STORE)
 
 				for edge_id, edge in entity[EDGES_KEY].items():
+					edge_data = edge[EDGE_DATA_KEY]
 					Edge(
-						to_id(entity_id, edge[0], POINT_CLASS_TAG),
-						to_id(entity_id, edge[1], POINT_CLASS_TAG),
+						to_id(entity_id, edge_data[0], POINT_CLASS_TAG),
+						to_id(entity_id, edge_data[1], POINT_CLASS_TAG),
 						to_id(entity_id, edge_id, EDGE_CLASS_TAG),
+						edge[EDGE_COLOUR_KEY] if EDGE_COLOUR_KEY in edge else DEFAULT_COLOUR,
 						ENTITY_STORE
 					)
 
