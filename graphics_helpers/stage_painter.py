@@ -2,11 +2,13 @@ from pyglet.graphics import Batch
 from pyglet.gl import GL_LINES
 
 
-def paint(entities):
+def paint(entities, x_c, y_c):
 	batch = Batch()
 	for _, edge in entities.edges.items():
 		p1, p2 = edge.get_point_pair(entities)
-		# print(f"${[p1.x, p1.y, p2.x, p2.y]}")
-		batch.add(2, GL_LINES, None, ("v2i", (p1.x, p1.y, p2.x, p2.y)))
-	# print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+		batch.add(2, GL_LINES, None, ("v2i", (p1.x + x_c, p1.y + y_c, p2.x + x_c, p2.y + y_c)))
 	batch.draw()
+
+
+def get_line_parameters(p1, p2):
+	return ()

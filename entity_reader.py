@@ -5,6 +5,7 @@ from entity_store.point import POINT_CLASS_TAG, Point
 from entity_store.edge import EDGE_CLASS_TAG, Edge
 from entity_store.wall import WALL_CLASS_TAG, Wall
 from entity_store.solid import Solid
+from entity_store import ENTITY_STORE
 import json
 
 
@@ -14,21 +15,22 @@ def read_assets():
 			assets = json.load(file)
 			for entity_id, entity in assets[ENTITIES_KEY].items():
 				for point_id, point in entity[POINTS_KEY].items():
-					Point(point[X_KEY], point[Y_KEY], point[Z_KEY], to_id(entity_id, point_id, POINT_CLASS_TAG))
+					Point(point[X_KEY], point[Y_KEY], point[Z_KEY], to_id(entity_id, point_id, POINT_CLASS_TAG), ENTITY_STORE)
 
 				for edge_id, edge in entity[EDGES_KEY].items():
 					Edge(
 						to_id(entity_id, edge[0], POINT_CLASS_TAG),
 						to_id(entity_id, edge[1], POINT_CLASS_TAG),
-						to_id(entity_id, edge_id, EDGE_CLASS_TAG)
+						to_id(entity_id, edge_id, EDGE_CLASS_TAG),
+						ENTITY_STORE
 					)
 
 				walls_asset = entity[WALLS_KEY]
 				walls = [None] * len(walls_asset)
 				for wall_id, wall in enumerate(walls_asset):
-					walls[wall_id] = Wall(wall, to_id(entity_id, wall_id, WALL_CLASS_TAG), entity_id)
+					walls[wall_id] = Wall(wall, to_id(entity_id, wall_id, WALL_CLASS_TAG), entity_id, ENTITY_STORE)
 
-				Solid(walls, entity_id)
+				Solid(walls, entity_id, ENTITY_STORE)
 
 
 def to_id(entity_id, sub_entity_id, sub_entity_class_tag):

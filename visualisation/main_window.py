@@ -13,10 +13,8 @@ class MainWindow(Window):
 	def on_key_press(self, key, modifiers):
 		if is_proper_command(key):
 			update_store(key)
-			# self.on_draw()
 
 	def on_draw(self):
-		print("on draw")
 		self.clear()
 		entities = create_stage()
-		paint(entities)
+		paint(entities, self.width // 2, self.height // 2)

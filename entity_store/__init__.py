@@ -2,7 +2,6 @@ from entity_store.edge import Edge
 from entity_store.point import Point
 from entity_store.solid import Solid
 from entity_store.wall import Wall
-from copy import deepcopy
 
 
 class EntityStore:
@@ -26,7 +25,9 @@ class EntityStore:
 		return self.class_to_store_map[class_ref.__name__][id]
 
 	def copy(self):
-		return EntityStore(deepcopy(self.points), self.edges, self.walls, self.solids)
+		entity_store = EntityStore(None, self.edges, self.walls, self.solids)
+		entity_store.points = {point_id: pt.copy(entity_store) for point_id, pt in self.points.items()}
+		return entity_store
 
 
 ENTITY_STORE = EntityStore()
