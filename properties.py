@@ -64,5 +64,3 @@ SHOW_CENTER = True
 CENTER_COLOUR = "magenta"
 CENTER_COORDINATES = (0, 0, 0)
 CENTER_ID = "center"
-
-"wady, stack, "
