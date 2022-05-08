@@ -1,12 +1,12 @@
 from properties import ASSETS_FILES
 from properties import POINTS_KEY, EDGES_KEY, WALLS_KEY, ENTITIES_KEY, EDGE_DATA_KEY, EDGE_COLOUR_KEY
 from properties import X_KEY, Y_KEY, Z_KEY
+from properties import DEFAULT_COLOUR
 from entity_store.point import POINT_CLASS_TAG, Point
 from entity_store.edge import EDGE_CLASS_TAG, Edge
 from entity_store.wall import WALL_CLASS_TAG, Wall
 from entity_store.solid import Solid
 from entity_store import ENTITY_STORE
-from graphics_helpers.colour_map import DEFAULT_COLOUR
 import json
 
 

@@ -3,9 +3,10 @@ from math import pi
 PROJECT_NAME = "Simple Virtual Camera"
 
 ASSETS_PATH_FORMAT = "assets/{0}"
+FIGURE_FILES = ["figure1.json"]
 ASSETS_FILES = list(map(
 	lambda file_name: ASSETS_PATH_FORMAT.format(file_name),
-	["figure1.json"]
+	FIGURE_FILES
 ))
 
 ENTITIES_KEY = "entities"
@@ -46,7 +47,22 @@ ZOOM_QUANTUM = 30
 
 TINY_NUMBER = 0.00000000000000001
 
+DEFAULT_COLOUR = "white"
+
+COLOUR_MAP = {
+	"green": (0, 255, 0),
+	"l-green": (170, 255, 170),
+	"red": (255, 0, 0),
+	"l-red": (255, 170, 170),
+	"blue": (0, 0, 255),
+	"l-blue": (170, 170, 255),
+	"magenta": (255, 0, 255),
+	DEFAULT_COLOUR: (255, 255, 255)
+}
+
 SHOW_CENTER = True
 CENTER_COLOUR = "magenta"
 CENTER_COORDINATES = (0, 0, 0)
 CENTER_ID = "center"
+
+"wady, stack, "
