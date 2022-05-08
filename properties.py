@@ -9,6 +9,8 @@ ASSETS_FILES = list(map(
 	FIGURE_FILES
 ))
 
+RESIZABLE = True
+
 ENTITIES_KEY = "entities"
 POINTS_KEY = "points"
 EDGES_KEY = "edges"
