@@ -21,9 +21,6 @@ class EntityStore:
 	def register(self, entity, id):
 		self.class_to_store_map[type(entity).__name__][id] = entity
 
-	def get_entity(self, class_ref, id):
-		return self.class_to_store_map[class_ref.__name__][id]
-
 	def copy(self):
 		entity_store = EntityStore(None, self.edges, self.walls, self.solids)
 		entity_store.points = {point_id: pt.copy(entity_store) for point_id, pt in self.points.items()}
