@@ -14,18 +14,15 @@ def transform_store(entities, x_c, y_c):
 	for point_id, point in entities.points.items():
 		new_point = point.to_vector()
 		camera_parameters_store = CAMERA_PARAMETERS_STORE.store
-		new_point = transform_point(
-			create_shift_matrix(
-				camera_parameters_store[X_SHIFT_KEY],
-				camera_parameters_store[Y_SHIFT_KEY],
-				camera_parameters_store[Z_SHIFT_KEY]
-			),
-			new_point
-		)
-		new_point = transform_point(create_x_rotation_matrix(camera_parameters_store[X_ROTATION_KEY]), new_point)
-		new_point = transform_point(create_y_rotation_matrix(camera_parameters_store[Y_ROTATION_KEY]), new_point)
-		new_point = transform_point(create_z_rotation_matrix(camera_parameters_store[Z_ROTATION_KEY]), new_point)
+		new_point = shift_with_angle(camera_parameters_store, new_point)
+		new_point = rotate_with_shift(camera_parameters_store, new_point, create_x_rotation_matrix, X_ROTATION_KEY)
+		new_point = rotate_with_shift(camera_parameters_store, new_point, create_y_rotation_matrix, Y_ROTATION_KEY)
+		new_point = rotate_with_shift(camera_parameters_store, new_point, create_z_rotation_matrix, Z_ROTATION_KEY)
+
+		# new_point = shift(camera_parameters_store, new_point, direction=1)
 		new_point = transform_point(create_cast_matrix(camera_parameters_store[ZOOM_KEY]), new_point)
+		# new_point = shift(camera_parameters_store, new_point, direction=-1)
+
 		new_point = transform_point(create_shift_matrix(x_c, y_c,	0), new_point)
 
 		entities.points[point_id] = Point(new_point[0], new_point[1], new_point[2], point.id, entities)
@@ -35,6 +32,38 @@ def transform_store(entities, x_c, y_c):
 def transform_point(t_matrix, p):
 	outcome = list(map(lambda row: sum([m_x * p_x for m_x, p_x in zip(row, p)]), t_matrix))
 	return list(map(lambda x: x / (outcome[3] if outcome[3] != 0.0 else TINY_NUMBER), outcome))
+
+
+def rotate(camera_parameters_store, new_point, direction=1):
+	new_point = transform_point(create_x_rotation_matrix(camera_parameters_store[X_ROTATION_KEY] * direction), new_point)
+	new_point = transform_point(create_y_rotation_matrix(camera_parameters_store[Y_ROTATION_KEY] * direction), new_point)
+	new_point = transform_point(create_z_rotation_matrix(camera_parameters_store[Z_ROTATION_KEY] * direction), new_point)
+	return new_point
+
+
+def shift_with_angle(camera_parameters_store, new_point):
+	new_point = rotate(camera_parameters_store, new_point, direction=-1)
+	new_point = shift(camera_parameters_store, new_point)
+	new_point = rotate(camera_parameters_store, new_point, direction=1)
+	return new_point
+
+
+def shift(camera_parameters_store, new_point, direction=1):
+	return transform_point(
+			create_shift_matrix(
+				camera_parameters_store[X_SHIFT_KEY] * direction,
+				camera_parameters_store[Y_SHIFT_KEY] * direction,
+				camera_parameters_store[Z_SHIFT_KEY] * direction
+			),
+			new_point
+		)
+
+
+def rotate_with_shift(camera_parameters_store, new_point, get_rotation_matrix, rotation_key):
+	new_point = shift(camera_parameters_store, new_point, direction=1)
+	new_point = transform_point(get_rotation_matrix(camera_parameters_store[rotation_key]), new_point)
+	new_point = shift(camera_parameters_store, new_point, direction=-1)
+	return new_point
 
 
 def create_shift_matrix(x, y, z):
