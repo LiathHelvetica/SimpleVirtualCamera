@@ -1,4 +1,5 @@
 from math import pi
+from pyglet.window.key import UP, DOWN
 
 PROJECT_NAME = "Simple Virtual Camera"
 
@@ -25,11 +26,11 @@ Z_KEY = "z"
 WINDOW_X_SIZE = 700
 WINDOW_Y_SIZE = 500
 
-SHIFT_OF_OBSERVER = 300
+SHIFT_OF_OBSERVER = 600
 
 SHIFT_QUANTUM = 10
 ROTATION_QUANTUM = pi / 30
-ZOOM_QUANTUM = 2
+ZOOM_QUANTUM = 1.1
 
 TINY_NUMBER = 0.00000000000000001
 
@@ -45,6 +46,9 @@ COLOUR_MAP = {
 	"magenta": (255, 0, 255),
 	DEFAULT_COLOUR: (255, 255, 255)
 }
+
+ZOOM_UP_KEY = UP
+ZOOM_DOWN_KEY = DOWN
 
 
 def identity_function(v):
