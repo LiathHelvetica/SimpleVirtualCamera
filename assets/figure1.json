@@ -26,12 +26,30 @@
         "HE": { "data": ["H", "E"], "colour": "green" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        {
+          "wall": ["AB", "BC", "CD", "AD"],
+          "colour": "green"
+        },
+        {
+          "wall": ["AE", "EF", "BF", "AB"],
+          "colour": "cyan"
+        },
+        {
+          "wall": ["BC", "CG", "FG", "BF"],
+          "colour": "red"
+        },
+        {
+          "wall": ["CD", "DH", "GH", "CG"],
+          "colour": "yellow"
+        },
+        {
+          "wall": ["AE", "HE", "DH", "AD"],
+          "colour": "magenta"
+        },
+        {
+          "wall": ["EF", "FG", "GH", "HE"],
+          "colour": "orange"
+        }
       ]
     },
     "entity-2": {
@@ -60,12 +78,30 @@
         "HE": { "data": ["H", "E"], "colour": "red" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        {
+          "wall": ["AB", "BC", "CD", "AD"],
+          "colour": "green"
+        },
+        {
+          "wall": ["AE", "EF", "BF", "AB"],
+          "colour": "cyan"
+        },
+        {
+          "wall": ["BC", "CG", "FG", "BF"],
+          "colour": "red"
+        },
+        {
+          "wall": ["CD", "DH", "GH", "CG"],
+          "colour": "yellow"
+        },
+        {
+          "wall": ["AE", "HE", "DH", "AD"],
+          "colour": "magenta"
+        },
+        {
+          "wall": ["EF", "FG", "GH", "HE"],
+          "colour": "orange"
+        }
       ]
     },
     "entity-3": {
@@ -94,12 +130,30 @@
         "HE": { "data": ["H", "E"], "colour": "blue" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        {
+          "wall": ["AB", "BC", "CD", "AD"],
+          "colour": "green"
+        },
+        {
+          "wall": ["AE", "EF", "BF", "AB"],
+          "colour": "cyan"
+        },
+        {
+          "wall": ["BC", "CG", "FG", "BF"],
+          "colour": "red"
+        },
+        {
+          "wall": ["CD", "DH", "GH", "CG"],
+          "colour": "yellow"
+        },
+        {
+          "wall": ["AE", "HE", "DH", "AD"],
+          "colour": "magenta"
+        },
+        {
+          "wall": ["EF", "FG", "GH", "HE"],
+          "colour": "orange"
+        }
       ]
     },
     "entity-4": {
@@ -128,12 +182,30 @@
         "HE": { "data": ["H", "E"] }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        {
+          "wall": ["AB", "BC", "CD", "AD"],
+          "colour": "green"
+        },
+        {
+          "wall": ["AE", "EF", "BF", "AB"],
+          "colour": "cyan"
+        },
+        {
+          "wall": ["BC", "CG", "FG", "BF"],
+          "colour": "red"
+        },
+        {
+          "wall": ["CD", "DH", "GH", "CG"],
+          "colour": "yellow"
+        },
+        {
+          "wall": ["AE", "HE", "DH", "AD"],
+          "colour": "magenta"
+        },
+        {
+          "wall": ["EF", "FG", "GH", "HE"],
+          "colour": "orange"
+        }
       ]
     }
   }

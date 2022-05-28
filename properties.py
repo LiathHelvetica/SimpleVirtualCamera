@@ -18,6 +18,8 @@ EDGES_KEY = "edges"
 WALLS_KEY = "walls"
 EDGE_DATA_KEY = "data"
 EDGE_COLOUR_KEY = "colour"
+WALL_COLOUR_KEY = "colour"
+WALL_DATA_KEY = "wall"
 
 X_KEY = "x"
 Y_KEY = "y"
@@ -35,6 +37,7 @@ ZOOM_QUANTUM = 1.1
 TINY_NUMBER = 0.00000000000000001
 
 DEFAULT_COLOUR = "white"
+YELLOW_KEY = "yellow"
 
 COLOUR_MAP = {
 	"green": (0, 255, 0),
@@ -44,11 +47,29 @@ COLOUR_MAP = {
 	"blue": (0, 0, 255),
 	"l-blue": (170, 170, 255),
 	"magenta": (255, 0, 255),
-	DEFAULT_COLOUR: (255, 255, 255)
+	"cyan": (0, 255, 255),
+	"orange": (255, 165, 0),
+	YELLOW_KEY: (255, 255, 0),
+	DEFAULT_COLOUR: (255, 255, 255),
+	"black": (0, 0, 0)
 }
 
 ZOOM_UP_KEY = UP
 ZOOM_DOWN_KEY = DOWN
+
+WITH_SURFACE_REMOVAL = True
+DEBUG_INTERSECTIONS = True
+DEBUG_COLOUR_KEY = YELLOW_KEY
+DEBUG_COLOUR = COLOUR_MAP[DEBUG_COLOUR_KEY]
+
+INTERSECTION_1_EDGE_ID_KEY = "edge-1-id"
+INTERSECTION_1_X_KEY = "edge-1-x"
+INTERSECTION_2_EDGE_ID_KEY = "edge-2-id"
+INTERSECTION_2_X_KEY = "edge-2-x"
+INTERSECTION_COLOUR_KEY = "intersection-colour"
+INTERSECTION_WALL_ID = "intersection-wall-id"
+INTERSECTION_X_KEY = "intersection-x"
+INTERSECTION_IS_BEGINNING_KEY = "intersection-is-beginning"
 
 
 def identity_function(v):
