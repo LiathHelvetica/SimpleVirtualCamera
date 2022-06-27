@@ -3,6 +3,7 @@ from pyglet.gl import GL_LINES, GL_POINTS
 from properties import INTERSECTION_1_X_KEY, INTERSECTION_2_X_KEY, INTERSECTION_COLOUR_KEY, INTERSECTION_WALL_ID, \
 	INTERSECTION_X_KEY, SHIFT_OF_OBSERVER, TINY_NUMBER, DEBUG_INTERSECTIONS, DEBUG_COLOUR, INTERSECTION_IS_BEGINNING_KEY
 from graphics_helpers.colour_map import map_to_edge_colour
+from numpy import array, sqrt
 
 
 def paint(entities, x_c, y_c):
@@ -51,8 +52,9 @@ def paint_with_surface_removal(entities_2d, entities, x_c, y_c):
 					)
 				)
 		active_walls.difference_update(deactivated_walls)
-		scan_intersections.sort(key=lambda v: v[INTERSECTION_X_KEY])
-		paint_scan(scan_y, scan_intersections, entities, entities_2d, x_c, y_c, batch)
+		if scan_intersections:
+			scan_intersections.sort(key=lambda v: v[INTERSECTION_X_KEY] - 0.5 * v[INTERSECTION_IS_BEGINNING_KEY])
+			paint_scan(scan_y, scan_intersections, entities, entities_2d, x_c, y_c, batch)
 
 	batch.draw()
 
@@ -88,8 +90,6 @@ def find_wall_with_scan_intersections(scan_y, wall_id, entities_2d):
 			outcome_edges.append(edge_id)
 	intersection_points = get_intersection_points_x(outcome_edges, entities_2d, scan_y)
 	n_intersections = len(intersection_points)
-	if n_intersections > 2:
-		print(intersection_points)
 	assert n_intersections <= 2
 	return None if n_intersections == 0 else {
 		INTERSECTION_1_X_KEY: intersection_points[0],
@@ -123,7 +123,7 @@ def get_intersection_points_x(outcome_edges, entities_2d, scan_y):
 
 def create_scan_intersection_object(x, intersections_data, entities, is_beginning):
 	return {
-		INTERSECTION_X_KEY: intersections_data[x],
+		INTERSECTION_X_KEY: x,
 		INTERSECTION_COLOUR_KEY: entities.walls[intersections_data[INTERSECTION_WALL_ID]].get_colour(),
 		INTERSECTION_WALL_ID: intersections_data[INTERSECTION_WALL_ID],
 		INTERSECTION_IS_BEGINNING_KEY: is_beginning
@@ -132,29 +132,48 @@ def create_scan_intersection_object(x, intersections_data, entities, is_beginnin
 
 def paint_scan(scan_y, scan_intersections, entities, entities_2d, x_c, y_c, batch):
 	active_walls = {}
-	n_scan_intersections = len(scan_intersections)
-	i = 0
-	while i < n_scan_intersections - 1:
-		current_wall = scan_intersections[i]
-		if current_wall[INTERSECTION_WALL_ID] in active_walls:
-			del active_walls[current_wall[INTERSECTION_WALL_ID]]
-		else:
-			active_walls[current_wall[INTERSECTION_WALL_ID]] = current_wall
+	# n_scan_intersections = len(scan_intersections)
+	# i = 0
+	scan_x = update_active_walls_for_scan(active_walls, scan_intersections)
+	while scan_intersections:
 		# current_colour = get_colour_of_nearest_wall(active_walls, entities, scan_y)
-		from_x = current_wall[INTERSECTION_X_KEY]
-		to_x = scan_intersections[i + 1][INTERSECTION_X_KEY]
-		fragment_center_x = (to_x - from_x) / 2
-		current_colour = get_colour_of_nearest_wall_2(active_walls, entities, scan_y, fragment_center_x)
+		from_x = scan_x
+		to_x = scan_intersections[0][INTERSECTION_X_KEY]
+		fragment_center_x = (to_x + from_x) / 2
+		# TODO: The error is in distance function
+		# current_colour = get_colour_of_nearest_wall_2(active_walls, entities, scan_y, fragment_center_x)
+		# current_colour = get_colour_of_nearest_wall(active_walls, entities, scan_y)
+		current_colour = get_colour_of_nearest_wall_3(active_walls, entities, scan_y, fragment_center_x)
 		if current_colour is not None:
 			batch.add(2, GL_LINES, None, (
 				"v2i", (round(from_x + x_c), round(scan_y + y_c), round(to_x + x_c), round(scan_y + y_c))
 			), (
 				"c3B", current_colour
 			))
-		i += 1
+		scan_x = update_active_walls_for_scan(active_walls, scan_intersections)
 
-	if DEBUG_INTERSECTIONS:
-		add_intersections_to_batch(batch, scan_intersections, scan_y, x_c, y_c)
+	# if DEBUG_INTERSECTIONS:
+		# add_intersections_to_batch(batch, scan_intersections, scan_y, x_c, y_c)
+
+
+def update_active_walls_for_scan(active_walls, scan_intersections):
+	current_x = scan_intersections[0][INTERSECTION_X_KEY]
+	current_tag = scan_intersections[0][INTERSECTION_IS_BEGINNING_KEY]
+	intersections_to_pop = 0
+	for intersection in scan_intersections:
+		if intersection[INTERSECTION_X_KEY] == current_x and intersection[INTERSECTION_IS_BEGINNING_KEY] == current_tag:
+			if intersection[INTERSECTION_IS_BEGINNING_KEY]:
+				active_walls[intersection[INTERSECTION_WALL_ID]] = intersection
+			else:
+				del active_walls[intersection[INTERSECTION_WALL_ID]]
+			intersections_to_pop += 1
+		else:
+			break
+
+	for _ in range(intersections_to_pop):
+		scan_intersections.pop(0)
+
+	return current_x
 
 
 def add_intersections_to_batch(batch, scan_intersections, scan_y, x_c, y_c):
@@ -171,9 +190,24 @@ def get_colour_of_nearest_wall_2(active_walls, entities, scan_y, x):
 	shortest_distance = float("inf")
 	for wall_id, wall_intersection in active_walls.items():
 		a, b, c, d = get_plane_equation(wall_id, entities)
-		current_distance = calculate_distance_to_pierce(a, b, c, d, scan_y, x)
+		# current_distance = calculate_distance_to_pierce(a, b, c, d, scan_y, x)
+		c = c if abs(c) > 0.0000000000001 else 0.0000000000001
+		current_distance = abs((d - a * x - b * scan_y) / c)
 		if current_distance < shortest_distance:
 			best_colour = wall_intersection[INTERSECTION_COLOUR_KEY]
+			shortest_distance = current_distance
+	return best_colour
+
+
+def get_colour_of_nearest_wall_3(active_walls, entities, scan_y, x):
+	best_colour = None
+	shortest_distance = float("inf")
+	for wall_id, wall_intersection in active_walls.items():
+		a, b, c, d = get_plane_equation(wall_id, entities)
+		current_distance = calculate_distance_to_pierce_5(a, b, c, d, scan_y, x)
+		if current_distance < shortest_distance:
+			best_colour = wall_intersection[INTERSECTION_COLOUR_KEY]
+			shortest_distance = current_distance
 	return best_colour
 
 
@@ -182,9 +216,10 @@ def get_colour_of_nearest_wall(active_walls, entities, scan_y):
 	shortest_distance = float("inf")
 	for wall_id, wall_intersection in active_walls.items():
 		a, b, c, d = get_plane_equation(wall_id, entities)
-		current_distance = calculate_distance_to_pierce(a, b, c, d, scan_y, wall_intersection[INTERSECTION_X_KEY])
+		current_distance = calculate_distance_to_pierce_5(a, b, c, d, scan_y, wall_intersection[INTERSECTION_X_KEY])
 		if current_distance < shortest_distance:
 			best_colour = wall_intersection[INTERSECTION_COLOUR_KEY]
+			shortest_distance = current_distance
 	return best_colour
 
 
@@ -200,7 +235,7 @@ def get_plane_equation(wall_id, entities):
 	a = (v_b.y - v_a.y) * (v_c.z - v_a.z) - (v_c.y - v_a.y) * (v_b.z - v_a.z)
 	b = (v_b.z - v_a.z) * (v_c.x - v_a.x) - (v_c.z - v_a.z) * (v_b.x - v_a.x)
 	c = (v_b.x - v_a.x) * (v_c.y - v_a.y) - (v_c.x - v_a.x) * (v_b.y - v_a.y)
-	d = -(a * v_a.x + b * v_a.y + c * v_a.x)
+	d = -(a * v_a.x + b * v_a.y + c * v_a.z)
 	return a, b, c, d
 
 
@@ -219,3 +254,27 @@ def calculate_distance_to_pierce(a, b, c, d, y, x):
 	y_target = t * y
 	z_target = SHIFT_OF_OBSERVER * (t - 1)
 	return x_target ** 2 + y_target ** 2 + (z_target + SHIFT_OF_OBSERVER) ** 2
+
+
+def calculate_distance_to_pierce_3(a, b, c, d, y, x):
+	l_b = array([0, 0, -SHIFT_OF_OBSERVER])
+	l_a = array([x, y, 0]) - l_b
+	t = (d - a * l_b[0] - b * l_b[1] - c * l_b[2]) / (a * l_a[0] + b * l_a[1] + c * l_a[2])
+	pierce_p = l_b + t * l_a
+	return sqrt(pierce_p[0] ** 2 + pierce_p[1] ** 2 + (SHIFT_OF_OBSERVER + pierce_p[2]) ** 2)
+
+
+def calculate_distance_to_pierce_4(a, b, c, d, y, x):
+	l_b = array([x, y, -SHIFT_OF_OBSERVER])
+	l_a = array([x, y, 0]) - l_b
+	t = (d - a * l_b[0] - b * l_b[1] - c * l_b[2]) / (a * l_a[0] + b * l_a[1] + c * l_a[2])
+	pierce_p = l_b + t * l_a
+	return sqrt((pierce_p[0] - x) ** 2 + (pierce_p[1] - y) ** 2 + (pierce_p[2]) ** 2)
+
+
+def calculate_distance_to_pierce_5(a, b, c, d, y, x):
+	l_b = array([x, y, -SHIFT_OF_OBSERVER])
+	l_a = array([x, y, 0]) - l_b
+	t = (d - a * l_b[0] - b * l_b[1] - c * l_b[2]) / (a * l_a[0] + b * l_a[1] + c * l_a[2])
+	pierce_p = l_b + t * l_a
+	return sqrt(pierce_p[2] ** 2)

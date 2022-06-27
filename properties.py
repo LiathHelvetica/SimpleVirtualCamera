@@ -4,7 +4,7 @@ from pyglet.window.key import UP, DOWN
 PROJECT_NAME = "Simple Virtual Camera"
 
 ASSETS_PATH_FORMAT = "assets/{0}"
-FIGURE_FILES = ["figure1.json"]
+FIGURE_FILES = ["figure2.json"]
 ASSETS_FILES = list(map(
 	lambda file_name: ASSETS_PATH_FORMAT.format(file_name),
 	FIGURE_FILES
@@ -57,7 +57,7 @@ COLOUR_MAP = {
 ZOOM_UP_KEY = UP
 ZOOM_DOWN_KEY = DOWN
 
-WITH_SURFACE_REMOVAL = True
+WITH_SURFACE_REMOVAL = False
 DEBUG_INTERSECTIONS = True
 DEBUG_COLOUR_KEY = YELLOW_KEY
 DEBUG_COLOUR = COLOUR_MAP[DEBUG_COLOUR_KEY]

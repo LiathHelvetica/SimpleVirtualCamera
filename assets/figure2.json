@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "entity-1": {
+      "points": {
+        "A": { "x": -200, "y": -200, "z": 100 },
+        "B": { "x": 200, "y": -200, "z": 100 },
+        "C": { "x": 200, "y": 200, "z": 100 },
+        "D": { "x": -200, "y": 200, "z": 100 },
+        "E": { "x": -200, "y": -200, "z": 300 },
+        "F": { "x": 200, "y": -200, "z": 300 },
+        "G": { "x": 200, "y": 200, "z": 300 },
+        "H": { "x": -200, "y": 200, "z": 300 }
+      },
+      "edges": {
+        "AB": { "data": ["A", "B"] },
+        "BC": { "data": ["B", "C"] },
+        "CD": { "data": ["C", "D"] },
+        "AD": { "data": ["A", "D"] },
+        "AE": { "data": ["A", "E"] },
+        "BF": { "data": ["B", "F"] },
+        "CG": { "data": ["C", "G"] },
+        "DH": { "data": ["D", "H"] },
+        "EF": { "data": ["E", "F"] },
+        "FG": { "data": ["F", "G"] },
+        "GH": { "data": ["G", "H"] },
+        "HE": { "data": ["H", "E"] }
+      },
+      "walls": [
+        {
+          "wall": ["AB", "BC", "CD", "AD"],
+          "colour": "green"
+        },
+        {
+          "wall": ["AE", "EF", "BF", "AB"],
+          "colour": "cyan"
+        },
+        {
+          "wall": ["BC", "CG", "FG", "BF"],
+          "colour": "red"
+        },
+        {
+          "wall": ["CD", "DH", "GH", "CG"],
+          "colour": "yellow"
+        },
+        {
+          "wall": ["AE", "HE", "DH", "AD"],
+          "colour": "magenta"
+        },
+        {
+          "wall": ["EF", "FG", "GH", "HE"],
+          "colour": "orange"
+        }
+      ]
+    }
+  }
+}
