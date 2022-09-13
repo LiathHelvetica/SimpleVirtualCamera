@@ -2,10 +2,10 @@
   "entities": {
     "entity-1": {
       "points": {
-        "A": { "x": 100, "y": 100, "z": 0 },
-        "B": { "x": 200, "y": 100, "z": 0 },
-        "C": { "x": 200, "y": 200, "z": 0 },
-        "D": { "x": 100, "y": 200, "z": 0 },
+        "A": { "x": 100, "y": 100, "z": 10 },
+        "B": { "x": 200, "y": 100, "z": 10 },
+        "C": { "x": 200, "y": 200, "z": 10 },
+        "D": { "x": 100, "y": 200, "z": 10 },
         "E": { "x": 100, "y": 100, "z": 300 },
         "F": { "x": 200, "y": 100, "z": 300 },
         "G": { "x": 200, "y": 200, "z": 300 },
@@ -23,23 +23,35 @@
         "EF": { "data": ["E", "F"], "colour": "green" },
         "FG": { "data": ["F", "G"], "colour": "green" },
         "GH": { "data": ["G", "H"], "colour": "green" },
-        "HE": { "data": ["H", "E"], "colour": "green" }
+        "HE": { "data": ["H", "E"], "colour": "green" },
+        "DB": { "data": ["D", "B"], "colour": "green" },
+        "HF": { "data": ["H", "F"], "colour": "green" },
+        "DG": { "data": ["D", "G"], "colour": "green" },
+        "CF": { "data": ["C", "F"], "colour": "green" },
+        "BE": { "data": ["B", "E"], "colour": "green" },
+        "AH": { "data": ["A", "H"], "colour": "green" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        { "data": ["AB", "DB", "AD"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["DB", "BC", "CD"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["BC", "CF", "BF"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["CF", "FG", "CG"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["EF", "HF", "HE"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["HF", "FG", "GH"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["DH", "AH", "AD"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["AH", "HE", "AE"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["AE", "BE", "AB"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["BE", "BF", "EF"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["CD", "CG", "DG"], "colour": "green", "edge-colour": "magenta" },
+        { "data": ["DH", "DG", "GH"], "colour": "green", "edge-colour": "magenta" }
       ]
     },
     "entity-2": {
       "points": {
-        "A": { "x": -100, "y": -100, "z": 0 },
-        "B": { "x": -200, "y": -100, "z": 0 },
-        "C": { "x": -200, "y": -200, "z": 0 },
-        "D": { "x": -100, "y": -200, "z": 0 },
+        "A": { "x": -100, "y": -100, "z": 10 },
+        "B": { "x": -200, "y": -100, "z": 10 },
+        "C": { "x": -200, "y": -200, "z": 10 },
+        "D": { "x": -100, "y": -200, "z": 10 },
         "E": { "x": -100, "y": -100, "z": 300 },
         "F": { "x": -200, "y": -100, "z": 300 },
         "G": { "x": -200, "y": -200, "z": 300 },
@@ -57,23 +69,35 @@
         "EF": { "data": ["E", "F"], "colour": "red" },
         "FG": { "data": ["F", "G"], "colour": "red" },
         "GH": { "data": ["G", "H"], "colour": "red" },
-        "HE": { "data": ["H", "E"], "colour": "red" }
+        "HE": { "data": ["H", "E"], "colour": "red" },
+        "DB": { "data": ["D", "B"], "colour": "red" },
+        "HF": { "data": ["H", "F"], "colour": "red" },
+        "DG": { "data": ["D", "G"], "colour": "red" },
+        "CF": { "data": ["C", "F"], "colour": "red" },
+        "BE": { "data": ["B", "E"], "colour": "red" },
+        "AH": { "data": ["A", "H"], "colour": "red" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        { "data": ["AB", "DB", "AD"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["DB", "BC", "CD"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["BC", "CF", "BF"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["CF", "FG", "CG"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["EF", "HF", "HE"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["HF", "FG", "GH"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["DH", "AH", "AD"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["AH", "HE", "AE"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["AE", "BE", "AB"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["BE", "BF", "EF"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["CD", "CG", "DG"], "colour": "red", "edge-colour": "magenta" },
+        { "data": ["DH", "DG", "GH"], "colour": "red", "edge-colour": "magenta" }
       ]
     },
     "entity-3": {
       "points": {
-        "A": { "x": -100, "y": 100, "z": 0 },
-        "B": { "x": -200, "y": 100, "z": 0 },
-        "C": { "x": -200, "y": 200, "z": 0 },
-        "D": { "x": -100, "y": 200, "z": 0 },
+        "A": { "x": -100, "y": 100, "z": 10 },
+        "B": { "x": -200, "y": 100, "z": 10 },
+        "C": { "x": -200, "y": 200, "z": 10 },
+        "D": { "x": -100, "y": 200, "z": 10 },
         "E": { "x": -100, "y": 100, "z": 300 },
         "F": { "x": -200, "y": 100, "z": 300 },
         "G": { "x": -200, "y": 200, "z": 300 },
@@ -91,23 +115,35 @@
         "EF": { "data": ["E", "F"], "colour": "blue" },
         "FG": { "data": ["F", "G"], "colour": "blue" },
         "GH": { "data": ["G", "H"], "colour": "blue" },
-        "HE": { "data": ["H", "E"], "colour": "blue" }
+        "HE": { "data": ["H", "E"], "colour": "blue" },
+        "DB": { "data": ["D", "B"], "colour": "blue" },
+        "HF": { "data": ["H", "F"], "colour": "blue" },
+        "DG": { "data": ["D", "G"], "colour": "blue" },
+        "CF": { "data": ["C", "F"], "colour": "blue" },
+        "BE": { "data": ["B", "E"], "colour": "blue" },
+        "AH": { "data": ["A", "H"], "colour": "blue" }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        { "data": ["AB", "DB", "AD"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["DB", "BC", "CD"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["BC", "CF", "BF"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["CF", "FG", "CG"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["EF", "HF", "HE"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["HF", "FG", "GH"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["DH", "AH", "AD"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["AH", "HE", "AE"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["AE", "BE", "AB"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["BE", "BF", "EF"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["CD", "CG", "DG"], "colour": "blue", "edge-colour": "magenta" },
+        { "data": ["DH", "DG", "GH"], "colour": "blue", "edge-colour": "magenta" }
       ]
     },
     "entity-4": {
       "points": {
-        "A": { "x": 100, "y": -100, "z": 0 },
-        "B": { "x": 200, "y": -100, "z": 0 },
-        "C": { "x": 200, "y": -200, "z": 0 },
-        "D": { "x": 100, "y": -200, "z": 0 },
+        "A": { "x": 100, "y": -100, "z": 10 },
+        "B": { "x": 200, "y": -100, "z": 10 },
+        "C": { "x": 200, "y": -200, "z": 10 },
+        "D": { "x": 100, "y": -200, "z": 10 },
         "E": { "x": 100, "y": -100, "z": 300 },
         "F": { "x": 200, "y": -100, "z": 300 },
         "G": { "x": 200, "y": -200, "z": 300 },
@@ -125,15 +161,27 @@
         "EF": { "data": ["E", "F"] },
         "FG": { "data": ["F", "G"] },
         "GH": { "data": ["G", "H"] },
-        "HE": { "data": ["H", "E"] }
+        "HE": { "data": ["H", "E"] },
+        "DB": { "data": ["D", "B"] },
+        "HF": { "data": ["H", "F"] },
+        "DG": { "data": ["D", "G"] },
+        "CF": { "data": ["C", "F"] },
+        "BE": { "data": ["B", "E"] },
+        "AH": { "data": ["A", "H"] }
       },
       "walls": [
-        ["AB", "BC", "CD", "AD"],
-        ["AE", "EF", "BF", "AB"],
-        ["BC", "CG", "FG", "BF"],
-        ["CD", "DH", "GH", "CG"],
-        ["AE", "HE", "DH", "AD"],
-        ["EF", "FG", "GH", "HE"]
+        { "data": ["AB", "DB", "AD"] },
+        { "data": ["DB", "BC", "CD"] },
+        { "data": ["BC", "CF", "BF"] },
+        { "data": ["CF", "FG", "CG"] },
+        { "data": ["EF", "HF", "HE"] },
+        { "data": ["HF", "FG", "GH"] },
+        { "data": ["DH", "AH", "AD"] },
+        { "data": ["AH", "HE", "AE"] },
+        { "data": ["AE", "BE", "AB"] },
+        { "data": ["BE", "BF", "EF"] },
+        { "data": ["CD", "CG", "DG"] },
+        { "data": ["DH", "DG", "GH"] }
       ]
     }
   }

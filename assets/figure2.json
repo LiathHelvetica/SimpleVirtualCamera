@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "entity-1": {
+      "points": {
+        "A": { "x": -200, "y": -200, "z": 10 },
+        "B": { "x": 200, "y": -200, "z": 10 },
+        "C": { "x": 200, "y": 200, "z": 10 },
+        "D": { "x": -200, "y": 200, "z": 10 },
+        "E": { "x": -200, "y": -200, "z": 300 },
+        "F": { "x": 200, "y": -200, "z": 300 },
+        "G": { "x": 200, "y": 200,  "z": 300 },
+        "H": { "x": -200, "y": 200, "z": 300 }
+      },
+      "edges": {
+        "AB": { "data": ["A", "B"], "colour": "l-green" },
+        "BC": { "data": ["B", "C"], "colour": "l-green" },
+        "CD": { "data": ["C", "D"], "colour": "l-green" },
+        "AD": { "data": ["A", "D"], "colour": "l-green" },
+        "AE": { "data": ["A", "E"], "colour": "green" },
+        "BF": { "data": ["B", "F"], "colour": "green" },
+        "CG": { "data": ["C", "G"], "colour": "green" },
+        "DH": { "data": ["D", "H"], "colour": "green" },
+        "EF": { "data": ["E", "F"], "colour": "green" },
+        "FG": { "data": ["F", "G"], "colour": "green" },
+        "GH": { "data": ["G", "H"], "colour": "green" },
+        "HE": { "data": ["H", "E"], "colour": "green" },
+        "DB": { "data": ["D", "B"], "colour": "green" },
+        "HF": { "data": ["H", "F"], "colour": "green" },
+        "DG": { "data": ["D", "G"], "colour": "green" },
+        "CF": { "data": ["C", "F"], "colour": "green" },
+        "BE": { "data": ["B", "E"], "colour": "green" },
+        "AH": { "data": ["A", "H"], "colour": "green" }
+      },
+      "walls": [
+        { "data": ["AB", "DB", "AD"], "colour": "magenta" },
+        { "data": ["DB", "BC", "CD"], "colour": "green" },
+        { "data": ["BC", "CF", "BF"], "colour": "yellow" },
+        { "data": ["CF", "FG", "CG"], "colour": "l-green" },
+        { "data": ["EF", "HF", "HE"], "colour": "red" },
+        { "data": ["HF", "FG", "GH"], "colour": "magenta" },
+        { "data": ["DH", "AH", "AD"], "colour": "blue" },
+        { "data": ["AH", "HE", "AE"], "colour": "l-red" },
+        { "data": ["AE", "BE", "AB"], "colour": "l-blue" },
+        { "data": ["BE", "BF", "EF"], "colour": "white" },
+        { "data": ["CD", "CG", "DG"], "colour": "red" },
+        { "data": ["DH", "DG", "GH"], "colour": "yellow" }
+      ]
+    }
+  }
+}

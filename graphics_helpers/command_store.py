@@ -2,14 +2,14 @@ from properties import SHIFT_QUANTUM, ROTATION_QUANTUM, ZOOM_QUANTUM, identity_f
 from pyglet.window.key import A, D, S, W, SPACE, LSHIFT, J, L, I, K, U, O, ESCAPE
 from graphics_helpers.stage_creator import transform_point, create_shift_x_matrix, create_shift_y_matrix, \
 	create_shift_z_matrix, create_x_rotation_matrix, create_y_rotation_matrix, create_z_rotation_matrix
-from properties import ZOOM_UP_KEY, ZOOM_DOWN_KEY
+from properties import ZOOM_UP_KEY, ZOOM_DOWN_KEY, DEFAULT_ZOOM
 
 
 class CommandStore:
 	def __init__(self):
 		self.get_new_point = identity_function
 		self.last_pressed_key = None
-		self.zoom_factor = 1.0
+		self.zoom_factor = DEFAULT_ZOOM
 
 	def zoom_command_was_committed(self):
 		return self.last_pressed_key == ZOOM_UP_KEY or self.last_pressed_key == ZOOM_DOWN_KEY
@@ -46,6 +46,7 @@ def update_command_store(key, main_window):
 	COMMAND_STORE.last_pressed_key = key
 	if key == ESCAPE:
 		main_window.reset_entities()
+		COMMAND_STORE.zoom_factor = DEFAULT_ZOOM
 	if key == ZOOM_UP_KEY:
 		COMMAND_STORE.zoom_factor = COMMAND_STORE.zoom_factor * ZOOM_QUANTUM
 	if key == ZOOM_DOWN_KEY:

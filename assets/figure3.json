@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "entity-1": {
+      "points": {
+        "A": { "x": -200, "y": 200, "z": 50 },
+        "B": { "x": -100, "y": 200, "z": 50 },
+        "C": { "x": 100, "y": 200, "z": 50 },
+        "D": { "x": 200, "y": 200, "z": 50 },
+        "E": { "x": 200, "y": -200, "z": 50 },
+        "F": { "x": 100, "y": -200, "z": 50 },
+        "G": { "x": -100, "y": -200,  "z": 50 },
+        "H": { "x": -200, "y": -200, "z": 50 }
+      },
+      "edges": {
+        "AC": { "data": ["A", "C"] },
+        "CF": { "data": ["C", "F"] },
+        "HF": { "data": ["H", "F"] },
+        "AH": { "data": ["A", "H"] },
+        "AF": { "data": ["A", "F"] },
+        "BD": { "data": ["B", "D"] },
+        "DE": { "data": ["D", "E"] },
+        "GE": { "data": ["G", "E"] },
+        "BG": { "data": ["B", "G"] },
+        "BE": { "data": ["B", "E"] }
+      },
+      "walls": [
+        { "data": ["AF", "HF", "AH"], "colour": "green" },
+        { "data": ["AF", "CF", "AC"], "colour": "green" },
+        { "data": ["BE", "GE", "BG"], "colour": "magenta" },
+        { "data": ["BE", "DE", "BD"], "colour": "magenta" }
+      ]
+    }
+  }
+}

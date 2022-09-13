@@ -22,9 +22,12 @@ class EntityStore:
 		self.class_to_store_map[type(entity).__name__][id] = entity
 
 	def copy(self):
-		entity_store = EntityStore(None, self.edges, self.walls, self.solids)
+		entity_store = self.copy_without_points()
 		entity_store.points = {point_id: pt.copy(entity_store) for point_id, pt in self.points.items()}
 		return entity_store
+
+	def copy_without_points(self):
+		return EntityStore(None, self.edges, self.walls, self.solids)
 
 
 ENTITY_STORE = EntityStore()

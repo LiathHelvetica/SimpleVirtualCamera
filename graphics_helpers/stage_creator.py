@@ -6,7 +6,7 @@ from math import sin, cos
 def create_stage(entities):
 	from graphics_helpers.command_store import COMMAND_STORE
 
-	entities_2d = entities.copy()
+	entities_2d = entities.copy_without_points()
 	for point_id, point in entities.points.items():
 		new_point = point.to_vector()
 		new_point = COMMAND_STORE.get_new_point(new_point)
@@ -14,9 +14,8 @@ def create_stage(entities):
 		entities.points[point_id] = Point(new_point[0], new_point[1], new_point[2], point.id, entities)
 
 		new_point = transform_point(create_cast_matrix(SHIFT_OF_OBSERVER), new_point)
-
-		if COMMAND_STORE.zoom_command_was_committed():
-			new_point = transform_point(create_zoom_matrix(COMMAND_STORE.zoom_factor), new_point)
+		# new_point = transform_point(create_zoom_matrix(COMMAND_STORE.zoom_factor), new_point)
+		new_point[2] = entities.points[point_id].z
 
 		entities_2d.points[point_id] = Point(new_point[0], new_point[1], new_point[2], point.id, entities_2d)
 	return entities_2d

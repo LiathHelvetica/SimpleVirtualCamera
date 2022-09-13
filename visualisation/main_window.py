@@ -1,8 +1,8 @@
-from properties import WINDOW_X_SIZE, WINDOW_Y_SIZE, PROJECT_NAME, RESIZABLE
+from properties import WINDOW_X_SIZE, WINDOW_Y_SIZE, PROJECT_NAME, RESIZABLE, WITH_SURFACE_REMOVAL
 from pyglet.window import Window
 from graphics_helpers.command_store import update_command_store
 from graphics_helpers.stage_creator import create_stage
-from graphics_helpers.stage_painter import paint
+from graphics_helpers.stage_painter import paint_without_surface_removal, paint_with_surface_removal
 from entity_store import ENTITY_STORE
 
 
@@ -26,8 +26,9 @@ class MainWindow(Window):
 		update_command_store(key, self)
 
 	def on_draw(self):
-		x_c = self.width // 2
-		y_c = self.height // 2
 		entities_2d = create_stage(self.entities)
 		self.clear()
-		paint(entities_2d, x_c, y_c)
+		if WITH_SURFACE_REMOVAL:
+			paint_with_surface_removal(self.entities, entities_2d, self.width, self.height)
+			return
+		paint_without_surface_removal(entities_2d, self.width, self.height)

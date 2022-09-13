@@ -1,5 +1,6 @@
 from properties import ASSETS_FILES
-from properties import POINTS_KEY, EDGES_KEY, WALLS_KEY, ENTITIES_KEY, EDGE_DATA_KEY, EDGE_COLOUR_KEY
+from properties import POINTS_KEY, EDGES_KEY, WALLS_KEY, ENTITIES_KEY, EDGE_DATA_KEY, EDGE_COLOUR_KEY, WALL_DATA_KEY,\
+	WALL_COLOUR_KEY, WALL_EDGE_COLOUR_KEY, DEFAULT_EDGE_COLOUR
 from properties import X_KEY, Y_KEY, Z_KEY
 from properties import DEFAULT_COLOUR
 from entity_store.point import POINT_CLASS_TAG, Point
@@ -31,7 +32,14 @@ def read_assets():
 				walls_asset = entity[WALLS_KEY]
 				walls = [None] * len(walls_asset)
 				for wall_id, wall in enumerate(walls_asset):
-					walls[wall_id] = Wall(wall, to_id(entity_id, wall_id, WALL_CLASS_TAG), entity_id, ENTITY_STORE)
+					walls[wall_id] = Wall(
+						wall[WALL_DATA_KEY],
+						to_id(entity_id, wall_id, WALL_CLASS_TAG),
+						entity_id,
+						wall[WALL_COLOUR_KEY] if WALL_COLOUR_KEY in wall else DEFAULT_COLOUR,
+						wall[WALL_EDGE_COLOUR_KEY] if WALL_EDGE_COLOUR_KEY in wall else DEFAULT_EDGE_COLOUR,
+						ENTITY_STORE
+					)
 
 				Solid(walls, entity_id, ENTITY_STORE)
 
